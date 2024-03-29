@@ -1,30 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo API</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photo API</title>
-</head>
+  <body>
+    <a href="https://www.pexels.com">Photos provided by Pexels</a>
 
-<body>
-  <a href="https://www.pexels.com">Photos provided by Pexels</a>
+    <!-- or show our white logo -->
 
-  <!-- or show our white logo -->
+    <a href="https://www.pexels.com">
+      <img src="https://images.pexels.com/lib/api/pexels-white.png" />
+    </a>
 
-  <a href="https://www.pexels.com">
-    <img src="https://images.pexels.com/lib/api/pexels-white.png" />
-  </a>
+    <!-- or show our black logo -->
 
-  <!-- or show our black logo -->
+    <a href="https://www.pexels.com">
+      <img src="https://images.pexels.com/lib/api/pexels.png" />
+    </a>
 
-  <a href="https://www.pexels.com">
-    <img src="https://images.pexels.com/lib/api/pexels.png" />
-  </a>
+    This
+    <a href="https://www.pexels.com/photo/food-dinner-lunch-meal-4147875"
+      >Photo</a
+    >
+    was taken by <a href="https://www.pexels.com/@daria">Daria</a> on Pexels.
 
-  This <a href="https://www.pexels.com/photo/food-dinner-lunch-meal-4147875">Photo</a> was taken by <a
-    href="https://www.pexels.com/@daria">Daria</a> on Pexels.
+    Todo App
+    <div id="app"></div>
+  </body>
 
-</body>
-
+  <script>
+    fetch("https://api.pexels.com/v1/collections/0s3xhne/", {
+      headers: {
+        Authorization:
+          "fDgXBhfZBKpkjThbX1hbseiIvoo0NKUWIzOvvjAm2S1NW1WWlIgjBALz",
+      },
+    })
+      .then((response) => response.json())
+      .then((body) => {
+        const imageList = body.media.map(
+          (photo) => `<img src="${photo.src.small}"/>`
+        );
+        return imageList;
+      })
+      .then((list) => {
+        document.getElementById("app").innerHTML = list;
+      })
+      .catch((err) => {
+        debugger;
+      });
+  </script>
 </html>
